@@ -19,13 +19,13 @@ Function Reset-LPADUserPassword
 
 	.NOTES
 		Version:			1.0
-		Author:				Lars Panzerbjørn
+		Author:				Lars PanzerbjÃ¸rn
 		Contact:			lars@panzerbjrn.eu / GitHub: Panzerbjrn / Twitter: LPetersson
 		Creation Date:		2018.05.01
 		Purpose/Change: 	Initial script development
 		
 	.EXAMPLE
-		Reset-LPADUserPassword -User LPanzerbjørn -Password "P4$$vv0rd!"
+		Reset-LPADUserPassword -User LPanzerbjÃ¸rn -Password "P4$$vv0rd!"
 		
 		This will reset the user's password, and not force the user to change the password
 		
@@ -45,7 +45,7 @@ Function Reset-LPADUserPassword
 		[Parameter(Mandatory=$True)][string]$Password,
 		[Parameter(Mandatory=$False)][switch]$ChangePasswordAtLogon
 	)
-	$USR = Get-LPADUser $User
+	$USR = Get-ADUser $User
 	IF($ChangePasswordAtLogon){
 	Set-ADAccountPassword -Identity $USR.SamAccountName -Reset -NewPassword (ConvertTo-SecureString -AsPlainText $Password -Force) -PassThru | Set-ADuser -ChangePasswordAtLogon $True
 	}
